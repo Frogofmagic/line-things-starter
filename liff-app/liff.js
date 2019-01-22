@@ -214,13 +214,6 @@ function liffConnectToDevice(device) {
 }
 
 function liffGetUserService(service) {
-    // Button pressed state
-    service.getCharacteristic(BTN_CHARACTERISTIC_UUID).then(characteristic => {
-        liffGetButtonStateCharacteristic(characteristic);
-    }).catch(error => {
-        uiStatusError(makeErrorMsg(error), false);
-    });
-
     // Toggle LED
     service.getCharacteristic(LED_CHARACTERISTIC_UUID).then(characteristic => {
         window.ledCharacteristic = characteristic;
@@ -230,6 +223,15 @@ function liffGetUserService(service) {
     }).catch(error => {
         uiStatusError(makeErrorMsg(error), false);
     });
+    
+    // Button pressed state
+    service.getCharacteristic(BTN_CHARACTERISTIC_UUID).then(characteristic => {
+        liffGetButtonStateCharacteristic(characteristic);
+    }).catch(error => {
+        uiStatusError(makeErrorMsg(error), false);
+    });
+
+    
 }
 
 function liffGetPSDIService(service) {
